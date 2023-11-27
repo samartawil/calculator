@@ -1,87 +1,36 @@
 import React, { useState } from 'react';
 import './Calculator.css';
-import NumberComponent from './NumberComponent';
-import ActionComponent from './ActionComponent';
-import KeyComponent from './KeyComponent';
+import Button from './Button';
 
 function Calculator() {
-  const [displayValue, setDisplayValue] = useState<string>('0');
-  const Key1 = ['CE','DEL','(',')']
-  const Key2 = ['%','+/-','x²','√']
-  const Numbers0 = [0];
-  const Numbers1 = [1,2,3];
-  const Numbers4 = [4,5,6];
-  const Numbers7 = [7,8,9];
-  const Action1 = ['/'];
-  const Action2 = ['*'];
-  const Action3 = ['-'];
-  const Action4 = ['+'];
+  const [displayValue] = useState<string>('0');
+  const buttons = [
+    [{ content:'CE', type: 'operation' }, { content:'DEL', type: 'operation' }, { content:'(', type: 'operation'  }, { content:')', type: 'operation' }],
+    [{ content:'%', type: 'operation'  }, { content:'+/-', type: 'operation' }, { content:'x²', type: 'operation' }, { content:'√', type: 'operation' }],
+    [{ content:7, type: 'number' }, { content:8, type: 'number' }, { content:9, type: 'number' }, { content:'+', type: 'action' }],
+    [{ content:4, type: 'number' }, { content:5, type: 'number' }, { content:6, type: 'number' }, { content:'-', type: 'action' }],
+    [{ content:1, type: 'number' }, { content:2, type: 'number' }, { content:3, type: 'number' }, { content:'*', type: 'action' }],
+    [{ content:0, type: 'number' }, { content:'=', type: 'equal'}, { content:'/', type: 'action'}]
+  ];
 
   return (
-    <div className="calculator border-black"> 
+    <div className="calculator border-black">
       <div className="disp border-black border-radius-8 font-family">
         <span style={{ color: 'grey' }}>{displayValue}</span>
       </div>
 
-      <div className="key1">
-        {Key1.map((string, index) => (
-          <KeyComponent key={index} act={string} />
+      <div className='keypad'>
+        {buttons.map((row, rowIndex) => (
+          <div key={rowIndex} className='keypad-row'>
+            {row.map((btn, btnIndex) => (
+              <Button key={btnIndex} content={btn.content.toString()} type={btn.type} />
+            ))}
+          </div>
         ))}
       </div>
-
-      <div className="key2">
-        {Key2.map((string, index) => (
-          <KeyComponent key={index} act={string} />
-        ))}
-      </div>
-
-      <div className="keypad">
-        <div className="keypad-row">
-          {Numbers7.map((number, index) => (
-            <NumberComponent key={index} number={number} />
-          ))}
-          {Action4.map((string, index) => (
-            <ActionComponent key={index} act={string} />
-          ))}
-        </div>
-
-        <div className="keypad-row">
-          {Numbers4.map((number, index) => (
-            <NumberComponent key={index} number={number} />
-          ))}
-          
-          {Action3.map((string, index) => (
-            <ActionComponent key={index} act={string} />
-          ))}
-        </div>
-
-        <div className="keypad-row">
-          {Numbers1.map((number, index) => (
-            <NumberComponent key={index} number={number} />
-          ))}
-
-          {Action2.map((string, index) => (
-            <ActionComponent key={index} act={string} />
-          ))}
-        </div>
-
-        <div className="keypad-row">
-          {Numbers0.map((number, index) => (
-            <NumberComponent key={index} number={number} />
-          ))}
-
-          <button className="eq border-black border-radius-8 color-white font-size font-family">=</button>
-
-          {Action1.map((string, index) => (
-            <ActionComponent key={index} act={string}/>
-          ))}
-
-        </div>
-      </div>
-
+      
     </div>
   );
 }
 
 export default Calculator;
-
