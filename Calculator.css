@@ -1,0 +1,109 @@
+.border-black{
+  border: 1px solid black;
+}
+
+.border-radius-8{
+  border-radius: 8px; 
+}
+
+.color-white{
+  color: white;
+}
+
+.font-size{
+  font-size: 20px;
+}
+
+.font-family{
+  font-family: "Roboto Mono", monospace;
+}
+
+.calculator {
+  width: 400px;
+  height: 620px;
+  border-radius: 16px;
+  display: grid;
+  padding: 30px 30px 30px 30px;
+  background-color: dimgray;
+  
+}
+
+.disp{
+  height: 100px;
+  width: 100%;
+  background-color: darkgrey;
+  padding-top: 15px;
+  text-align: right;
+  color: black;
+  font-size: 40px;
+  overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+  height: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+  background-color: rgb(87, 86, 86);
+}
+
+.key1 , .key2 {
+  height: 65px;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.op{
+  flex: 1; 
+  background-color: #f69906;
+}
+
+.op:hover{
+  background-color: chocolate;
+}
+
+.keypad{
+  width: 100%;
+  display: grid;
+  gap: 20px
+}
+
+.keypad-row{
+  height: 65px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.num{
+  height: 65px;
+  width: 100%;
+  background-color: #313131;
+}
+
+.num:hover{
+  background-color: #313131a8;
+}
+
+.act{
+  height: 65px;
+  width: 100%;
+  background-color: #f69906;
+  margin: 0;
+}
+
+.act:hover{
+  background-color: chocolate;
+}
+
+.eq {
+  width: 220%;
+  height: 65px;
+  background-color: #f69906;
+}
+
+.eq:hover{
+  background-color: chocolate;
+}
