@@ -39,6 +39,12 @@
   overflow-x: auto;
 }
 
+.clipboard-message {
+  color: red;
+  text-align: left;
+  font-size: 20px;
+}
+
 ::-webkit-scrollbar {
   height: 7px;
 }
