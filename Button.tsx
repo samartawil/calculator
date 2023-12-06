@@ -1,22 +1,34 @@
 type ButtonProps = {
-    content: string;
-    type: string;
-  };
+  content: string | number;
+  type: string;
+  onClick: (value: string) => void;
+};
+
+type Classes = {
+  [action:string]: string;
+  operation: string;
+  number: string;
+  equal: string;
+}
+
   
 const Button = (props: ButtonProps) => {
+  const classes: Classes = {
+    action: 'act border-black border-radius-8 color-white font-size font-family',
+    number: 'num border-black border-radius-8 color-white font-size font-family',
+    operation: 'op border-black border-radius-8 color-white font-size font-family',
+    equal: 'eq border-black border-radius-8 color-white font-size font-family'
+  }
+
+  const handleClick = () => {
+    console.log(`Button clicked: ${props.content}`);
+    props.onClick(props.content.toString());
+  };
+
   return (
     <button
-        className={
-          props.type == 'action'
-            ? 'act border-black border-radius-8 color-white font-size font-family'
-          : props.type == 'number'
-            ? 'num border-black border-radius-8 color-white font-size font-family'
-          : props.type == 'operation'
-            ? 'op border-black border-radius-8 color-white font-size font-family'
-          : props.type == 'equal'
-            ? 'eq border-black border-radius-8 color-white font-size font-family'
-          : ''
-        }>
+        className={classes[props.type]}
+        onClick={handleClick}>
       {props.content}
     </button>
   );
