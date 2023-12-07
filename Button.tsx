@@ -26,9 +26,7 @@ const Button = (props: ButtonProps) => {
   };
 
   return (
-    <button
-        className={classes[props.type]}
-        onClick={handleClick}>
+    <button className={classes[props.type]} onClick={handleClick}>
       {props.content}
     </button>
   );
