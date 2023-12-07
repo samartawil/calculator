@@ -1,15 +1,23 @@
 export const handleEq = (expression: string): string => {
-  const order: string[] = ['²', '√', '()'];
+  const operationOrder: string[] = ['²', '√', '()'];
   while (expression.match(/[+\-*/]/)) {
-    for (const vertex of order) {
-      if (vertex === '²') expression = handleSq(expression);
-      else if (vertex === '√') expression = handleSqr(expression);
-      else if (vertex === '()') expression = handleParentheses(expression);
-    }
+    operationOrder.forEach((operation) => {
+      expression = executeOperation(expression, operation);
+    });
     expression = handleOperations(expression, ['*', '/']);
     expression = handleOperations(expression, ['+', '-']);
   }
   return expression;
+};
+
+const executeOperation = (expression: string, operation: string): string => {
+  const operationHandlers: Record<string, (expression: string) => string> = {
+    '²': handleSq,
+    '√': handleSqr,
+    '()': handleParentheses,
+  };
+
+  return operationHandlers[operation](expression);
 };
 
 export const handleSq = (expression: string): string => {
@@ -79,4 +87,3 @@ export const calculate = (left: string, right: string, operator: string): string
     default: return 'Error';
   }
 };
-
