@@ -16,7 +16,6 @@ const executeOperation = (expression: string, operation: string): string => {
     '√': handleSqr,
     '()': handleParentheses,
   };
-
   return operationHandlers[operation](expression);
 };
 
@@ -81,9 +80,13 @@ export const calculate = (left: string, right: string, operator: string): string
   }
   switch (operator) {
     case '+': return String(leftValue + rightValue);
+      break;
     case '-': return String(leftValue - rightValue);
+      break;
     case '*': return String(leftValue * rightValue);
+      break;
     case '/': return (rightValue === 0) ? 'Error' : (leftValue === 0) ? 'Infinity' : String(leftValue / rightValue);
+      break;
     default: return 'Error';
   }
 };
