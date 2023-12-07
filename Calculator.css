@@ -39,12 +39,6 @@
   overflow-x: auto;
 }
 
-.clipboard-message {
-  color: red;
-  text-align: left;
-  font-size: 20px;
-}
-
 ::-webkit-scrollbar {
   height: 7px;
 }
@@ -52,6 +46,12 @@
 ::-webkit-scrollbar-thumb {
   border-radius: 7px;
   background-color: rgb(87, 86, 86);
+}
+
+.clipboard-message {
+  color: red;
+  text-align: left;
+  font-size: 20px;
 }
 
 .op{
