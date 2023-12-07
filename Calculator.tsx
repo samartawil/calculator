@@ -12,11 +12,9 @@ const Calculator: React.FC = () => {
   useEffect(() => updateDisplay(result !== '' ? result : input || '0'), [input, result]);
 
   const updateDisplay = (currentValue: string): void => {
-    if (currentValue === 'Error') {
-      setDisplayValue('<span style="color: red;">Error</span>');
-    } else {
-      setDisplayValue(currentValue);
-    }
+    if (currentValue === 'Error') setDisplayValue('<span style="color: red;">Error</span>');
+    else if (currentValue === 'Infinity') setDisplayValue('<span style="color: darkred;">Infinity</span>')
+    else setDisplayValue(currentValue);
   };
 
   const handleCalculatorButtonClick = (value: string): void => {
@@ -25,27 +23,14 @@ const Calculator: React.FC = () => {
   };
 
   const handleSign = (): void => {
-    if (input === '') {
-      setInput('-');
-    } else if (
-      isOperator(input[input.length - 1]) ||
-      input[input.length - 1] === '('
-    ) {
-      setInput((prevInput) => prevInput + '-');
-    } else {
+    if (input === '') setInput('-');
+    else if ( isOperator(input[input.length - 1]) || input[input.length - 1] === '(') setInput((prevInput) => prevInput + '-');
+    else {
       let match = input.match(/(-?\d*\.?\d+)$/);
       if (match) {
         let number = match[1];
-        if (number.charAt(0) === '-') {
-          setInput((prevInput) =>
-            prevInput.slice(0, -number.length) + number.slice(1)
-          );
-        } else {
-          setInput(
-            (prevInput) =>
-              prevInput.slice(0, -number.length) + '-' + number
-          );
-        }
+        if (number.charAt(0) === '-') setInput((prevInput) =>prevInput.slice(0, -number.length) + number.slice(1));
+        else setInput((prevInput) => prevInput.slice(0, -number.length) + '-' + number);
       }
     }
   };
@@ -55,14 +40,10 @@ const Calculator: React.FC = () => {
   };  
 
   const handleDel = (): void => {
-    if (input === 'Error' || input === 'NaN' || input === 'Infinity') {
-      clear();
-    } else if (input.endsWith('/100')) {
-      setInput((prevInput) => prevInput.slice(0, -4));
-    } else if (input !== '') {
-      setInput((prevInput) => prevInput.slice(0, -1));
-    }
+    if (['Error', 'NaN', 'Infinity'].includes(result)) clear();
+    else setInput(prevInput => input.endsWith('/100') ? prevInput.slice(0, -4) : prevInput.slice(0, -1));
   };
+  
   
   const clear = (): void => {
     setInput('');
@@ -104,11 +85,7 @@ const Calculator: React.FC = () => {
   return (
     <div className="calculator border-black">
       <div className="disp-container">
-        <div
-          className="disp border-black border-radius-8 font-family"
-          style={{ cursor: 'pointer' }}
-          onClick={handleDisplayClick}
-        >
+        <div className="disp border-black border-radius-8 font-family" style={{ cursor: 'pointer' }} onClick={handleDisplayClick}>
           <span style={{ color: 'grey' }} dangerouslySetInnerHTML={{ __html: displayValue }} />
         </div>
         {clipboardMessage && (
