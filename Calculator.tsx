@@ -13,7 +13,8 @@ const Calculator: React.FC = () => {
 
   const updateDisplay = (currentValue: string): void => {
     if (currentValue === 'Error') setDisplayValue('<span style="color: red;">Error</span>');
-    else if (currentValue === 'Infinity') setDisplayValue('<span style="color: darkred;">Infinity</span>')
+    else if (currentValue === 'Infinity') setDisplayValue('<span style="color: darkred;">Infinity</span>');
+    else if (input ==='') setDisplayValue('<span style="color: grey;">0</span>');
     else setDisplayValue(currentValue);
   };
 
@@ -86,7 +87,7 @@ const Calculator: React.FC = () => {
     <div className="calculator border-black">
       <div className="disp-container">
         <div className="disp border-black border-radius-8 font-family" style={{ cursor: 'pointer' }} onClick={handleDisplayClick}>
-          <span style={{ color: 'grey' }} dangerouslySetInnerHTML={{ __html: displayValue }} />
+          <span dangerouslySetInnerHTML={{ __html: displayValue }} />
         </div>
         {clipboardMessage && (
           <div className="clipboard-message">{clipboardMessage}</div>
